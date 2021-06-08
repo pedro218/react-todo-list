@@ -1,31 +1,45 @@
 import React, { useState } from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css'
-import { Container, ListGroup, Button } from 'react-bootstrap'
+import { Container, Button } from 'react-bootstrap'
 
-import Form from './TaskForm'
+import TaskForm from './TaskForm'
+import Categories from './Categories'
+import NewCategoryForm from './NewCategoryForm'
 
 const todoList = [
   { 
     id: 0,
     task: 'Check out site',
+    category: 'General',
     complete: true
   },
   {
     id: 1,
     task: 'Test the site',
+    category: 'General',
+    complete: false
+  },
+  {
+    id: 3,
+    task: 'Learn Node',
+    category: 'Educational',
     complete: false
   }
-
 ]
+const initialCategories = ['General', 'Educational']
 
 const App = () => {
   const [todos, setTodos] = useState(todoList)
+  const [categories, setCategories] = useState(initialCategories)
+  const [newTask, setNewTask] = useState(false)
+  const [newCategory, setNewCategory] = useState(false)
 
   const addTask = task => {
-    console.log('Adding task')
+    console.log(task)
     const id = todos[todos.length - 1].id + 1
     setTodos([...todos, {id, ...task}])
-    console.log('Added task')
+    console.log(todos)
+    setNewTask(false)
   }
 
   const toggleComplete = id => {
@@ -36,40 +50,37 @@ const App = () => {
     }))
   }
 
-  const renderedList = () => {
-    return todos.map(todo => {
-      return (
-        <ListGroup.Item key={todo.id}>
-          <div className="d-flex justify-content-between align-items-center">
-            <div>
-              <p style={{ textDecoration: todo.complete ? 'line-through' : 'none'}}>Task: {todo.task}</p>
-            </div>
-            <Button 
-              variant="success" 
-              className="float-right" 
-              style={{ height: '40px' }}
-              onClick={() => toggleComplete(todo.id)}
-            >
-              {todo.complete ? 'undo' : 'complete'}
-            </Button>
-          </div>
-        </ListGroup.Item>
-      )
-    })
+  const addCategory = category => {
+    setCategories([...categories, category])
   }
 
   return (
     <Container>
-      <Form addTask={addTask}/>
+      {newTask ? 
+        <TaskForm 
+          addTask={addTask}
+          categories={categories}
+          cancelTask={() => setNewTask(false)} 
+        /> : 
+        <Button variant="outline-success" onClick={() => setNewTask(true)}>New Task</Button>
+      }
       <hr />
-      <ListGroup>
-      {renderedList()}
-      </ListGroup>
+      {newCategory ?
+        <NewCategoryForm 
+          cancelAdd={() => setNewCategory(!newCategory)}
+          addCategory={addCategory}
+        /> :
+        <Button
+          variant="outline-primary"
+          onClick={() => setNewCategory(!newCategory)}
+        >
+          New Category
+        </Button>
+      }
+      <Categories categories={categories} todos={todos} toggleComplete={toggleComplete} />
       
     </Container>
   )
 }
 
 export default App
-
-// import 'bootstrap/dist/css/bootstrap.min.css'
