@@ -39,7 +39,6 @@ const App = () => {
     const id = todos[todos.length - 1].id + 1
     setTodos([...todos, {id, ...task}])
     console.log(todos)
-    setNewTask(false)
   }
 
   const toggleComplete = id => {
@@ -54,29 +53,40 @@ const App = () => {
     setCategories([...categories, category])
   }
 
+  const showTorC = (makeTrue, makeFalse) => {
+    makeTrue(true)
+    makeFalse(false)
+  }
+
   return (
     <Container>
+      <Button 
+        variant={!newTask ? 'outline-success' : 'success'} 
+        onClick={() => showTorC(setNewTask, setNewCategory)}
+      >
+        New Task
+      </Button> {' '}
+      <Button
+        variant={!newCategory ? 'outline-primary' : 'primary'}
+        onClick={() => showTorC(setNewCategory, setNewTask)}
+      >
+        New Category
+      </Button>
+
       {newTask ? 
         <TaskForm 
           addTask={addTask}
           categories={categories}
-          cancelTask={() => setNewTask(false)} 
-        /> : 
-        <Button variant="outline-success" onClick={() => setNewTask(true)}>New Task</Button>
+          cancelTask={() => setNewTask(false)}
+        /> : ''
       }
-      <hr />
       {newCategory ?
         <NewCategoryForm 
           cancelAdd={() => setNewCategory(!newCategory)}
           addCategory={addCategory}
-        /> :
-        <Button
-          variant="outline-primary"
-          onClick={() => setNewCategory(!newCategory)}
-        >
-          New Category
-        </Button>
+        /> : ''
       }
+      <hr />
       <Categories categories={categories} todos={todos} toggleComplete={toggleComplete} />
       
     </Container>

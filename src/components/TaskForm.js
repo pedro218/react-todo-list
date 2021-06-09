@@ -39,9 +39,8 @@ const TaskForm = ({ addTask, cancelTask, categories }) => {
           </Form.Control>
         </Form.Group>
         <Form.Group>
-          <Button variant="danger" onClick={cancelTask}>Close</Button> {' '}
-          <Button variant="warning" onClick={() => setTask('')}>Reset</Button>{' '}
-          <Button variant="secondary" type="submit">Add Task</Button>
+          <Button variant="secondary" onClick={cancelTask}>Close</Button> {' '}
+          <Button variant="info" type="submit">Add Task</Button>
         </Form.Group>
       </Form>
     </div>

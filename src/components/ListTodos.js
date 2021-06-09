@@ -16,7 +16,7 @@ const ListTodo = ( { todos, toggleComplete, category }) => {
             <Button 
               variant="dark" 
               className="float-right" 
-              style={{ height: '40px' }}
+              size="sm"
               onClick={() => toggleComplete(todo.id)}
             >
               {todo.complete ? 'undo' : 'complete'}

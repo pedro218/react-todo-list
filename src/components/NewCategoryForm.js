@@ -21,7 +21,7 @@ const NewCategoryForm = ({ addCategory, cancelAdd }) => {
           onChange={e => setCategory(e.target.value)}
           required
         />
-        <Button variant="warning" onClick={cancelAdd}>Cancel</Button>{' '}
+        <Button variant="secondary" onClick={cancelAdd}>Done</Button>{' '}
         <Button variant="info" type="submit">Add</Button>
       </Form.Row>
     </Form>
