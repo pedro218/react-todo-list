@@ -1,11 +1,14 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { ListGroup, Button } from 'react-bootstrap'
 
 const ListTodo = ( { todos, toggleComplete, category }) => {
+  const [seeComplete, setSeeComplete] = useState(true)
 
   const renderedList = () => {
     return todos.map(todo => {
       if (todo.category !== category)
+        return null
+      if (!seeComplete && todo.complete) 
         return null
       return (
         <ListGroup.Item key={todo.id} style={{ color: todo.complete ? 'rgba(0,0,0,.5)' : 'black'}}>
@@ -28,9 +31,12 @@ const ListTodo = ( { todos, toggleComplete, category }) => {
   }
 
   return (
-    <ListGroup>
-      {renderedList()}
-    </ListGroup>
+    <>
+      <input onChange={() => setSeeComplete(!seeComplete)} type="checkbox" checked={seeComplete} /> Show Complete
+      <ListGroup>
+        {renderedList()}
+      </ListGroup>
+    </>
   )
 }
 
