@@ -5,40 +5,40 @@ import { Container, Button } from 'react-bootstrap'
 import TaskForm from './TaskForm'
 import Categories from './Categories'
 import NewCategoryForm from './NewCategoryForm'
+import ShowModal from './ShowModal'
 
 const todoList = [
   { 
     id: 0,
     task: 'Check out site',
-    category: 'General',
+    category: 'GENERAL',
     complete: true
   },
   {
     id: 1,
     task: 'Test the site',
-    category: 'General',
+    category: 'GENERAL',
     complete: false
   },
   {
     id: 3,
     task: 'Learn Node',
-    category: 'Educational',
+    category: 'EDUCATIONAL',
     complete: false
   }
 ]
-const initialCategories = ['General', 'Educational']
+const initialCategories = ['GENERAL', 'EDUCATIONAL']
 
 const App = () => {
   const [todos, setTodos] = useState(todoList)
   const [categories, setCategories] = useState(initialCategories)
   const [newTask, setNewTask] = useState(false)
   const [newCategory, setNewCategory] = useState(false)
+  const [showModal, setShowModal] = useState(false)
 
   const addTask = task => {
-    console.log(task)
     const id = todos[todos.length - 1].id + 1
     setTodos([...todos, {id, ...task}])
-    console.log(todos)
   }
 
   const toggleComplete = id => {
@@ -50,7 +50,14 @@ const App = () => {
   }
 
   const addCategory = category => {
-    setCategories([...categories, category])
+    if (categories.includes(category))
+      setShowModal(true)
+    else 
+      setCategories([...categories, category])
+  }
+
+  const closeModal = () => {
+    setShowModal(false)
   }
 
   const showTorC = (makeTrue, makeFalse) => {
@@ -86,9 +93,14 @@ const App = () => {
           addCategory={addCategory}
         /> : ''
       }
+      <ShowModal 
+        title="Error Creating Category"
+        message="Category with same name has already been created."
+        showModal={showModal} 
+        closeModal={closeModal} 
+      />
       <hr />
-      <Categories categories={categories} todos={todos} toggleComplete={toggleComplete} />
-      
+      <Categories categories={categories} todos={todos} toggleComplete={toggleComplete} /> 
     </Container>
   )
 }

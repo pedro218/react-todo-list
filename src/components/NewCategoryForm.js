@@ -6,7 +6,7 @@ const NewCategoryForm = ({ addCategory, cancelAdd }) => {
 
   const onSubmit = event => {
     event.preventDefault()
-    addCategory(category)
+    addCategory(category.toUpperCase())
     setCategory('')
   }
 
