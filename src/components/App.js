@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css'
-import { Container, Button } from 'react-bootstrap'
+import { Navbar, Container, Button } from 'react-bootstrap'
 
 import TaskForm from './TaskForm'
 import Categories from './Categories'
@@ -66,42 +66,50 @@ const App = () => {
   }
 
   return (
-    <Container>
-      <Button 
-        variant={!newTask ? 'outline-success' : 'success'} 
-        onClick={() => showTorC(setNewTask, setNewCategory)}
-      >
-        New Task
-      </Button> {' '}
-      <Button
-        variant={!newCategory ? 'outline-primary' : 'primary'}
-        onClick={() => showTorC(setNewCategory, setNewTask)}
-      >
-        New Category
-      </Button>
+    <div>
+      <Navbar bg="dark" variant="dark">
+        <div class="container-fluid">
+          <Navbar.Brand>Todo List Application</Navbar.Brand>
+        </div>
+      </Navbar>
+      <br />
+      <Container>
+        <Button 
+          variant={!newTask ? 'outline-success' : 'success'} 
+          onClick={() => showTorC(setNewTask, setNewCategory)}
+        >
+          New Task
+        </Button> {' '}
+        <Button
+          variant={!newCategory ? 'outline-primary' : 'primary'}
+          onClick={() => showTorC(setNewCategory, setNewTask)}
+        >
+          New Category
+        </Button>
 
-      {newTask ? 
-        <TaskForm 
-          addTask={addTask}
-          categories={categories}
-          cancelTask={() => setNewTask(false)}
-        /> : ''
-      }
-      {newCategory ?
-        <NewCategoryForm 
-          cancelAdd={() => setNewCategory(!newCategory)}
-          addCategory={addCategory}
-        /> : ''
-      }
-      <ShowModal 
-        title="Error Creating Category"
-        message="Category with same name has already been created."
-        showModal={showModal} 
-        closeModal={closeModal} 
-      />
-      <hr />
-      <Categories categories={categories} todos={todos} toggleComplete={toggleComplete} /> 
-    </Container>
+        {newTask ? 
+          <TaskForm 
+            addTask={addTask}
+            categories={categories}
+            cancelTask={() => setNewTask(false)}
+          /> : ''
+        }
+        {newCategory ?
+          <NewCategoryForm 
+            cancelAdd={() => setNewCategory(!newCategory)}
+            addCategory={addCategory}
+          /> : ''
+        }
+        <ShowModal 
+          title="Error Creating Category"
+          message="Category with same name has already been created."
+          showModal={showModal} 
+          closeModal={closeModal} 
+        />
+        <hr />
+        <Categories categories={categories} todos={todos} toggleComplete={toggleComplete} /> 
+      </Container>
+    </div>
   )
 }
 
