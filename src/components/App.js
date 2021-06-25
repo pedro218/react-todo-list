@@ -1,33 +1,12 @@
 import React, { useState } from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { Navbar, Container, Button } from 'react-bootstrap'
+import { todoList, initialCategories } from '../data/todoList'
 
 import TaskForm from './TaskForm'
 import Categories from './Categories'
 import NewCategoryForm from './NewCategoryForm'
 import ShowModal from './ShowModal'
-
-const todoList = [
-  { 
-    id: 0,
-    task: 'Check out site',
-    category: 'GENERAL',
-    complete: true
-  },
-  {
-    id: 1,
-    task: 'Test the site',
-    category: 'GENERAL',
-    complete: false
-  },
-  {
-    id: 3,
-    task: 'Learn Node',
-    category: 'EDUCATIONAL',
-    complete: false
-  }
-]
-const initialCategories = ['GENERAL', 'EDUCATIONAL']
 
 const App = () => {
   const [todos, setTodos] = useState(todoList)

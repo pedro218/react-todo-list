@@ -13,8 +13,9 @@ const ListTodo = ( { todos, toggleComplete, category }) => {
       return (
         <ListGroup.Item key={todo.id} style={{ color: todo.complete ? 'rgba(0,0,0,.5)' : 'black'}}>
           <div className="d-flex justify-content-between align-items-center">
-            <div>
-              <p style={{ textDecoration: todo.complete ? 'line-through' : 'none'}}>{todo.task}</p>
+            <div className="d-flex align-items-center">
+              <input style={{ marginRight: '5px' }}onChange={() => toggleComplete(todo.id)} type="checkbox" />
+              <div style={{ textDecoration: todo.complete ? 'line-through' : 'none'}}>{todo.task}</div>
             </div>
             <Button 
               variant="dark" 
@@ -32,7 +33,15 @@ const ListTodo = ( { todos, toggleComplete, category }) => {
 
   return (
     <>
-      <input onChange={() => setSeeComplete(!seeComplete)} type="checkbox" checked={seeComplete} /> Show Complete
+      <Button 
+        onClick={() => setSeeComplete(!seeComplete)} 
+        variant={seeComplete ? 'dark' : 'outline-dark'}
+        size="sm"
+        checked={seeComplete}
+        style={{ marginTop: '5px', marginBottom: '5px'}}
+      > 
+        Show Complete
+      </Button>
       <ListGroup>
         {renderedList()}
       </ListGroup>
