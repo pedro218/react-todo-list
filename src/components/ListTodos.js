@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { ListGroup, Button } from 'react-bootstrap'
+import { ListGroup, Button, Dropdown } from 'react-bootstrap'
 
 const ListTodo = ( { todos, toggleComplete, category }) => {
   const [seeComplete, setSeeComplete] = useState(true)
@@ -15,16 +15,17 @@ const ListTodo = ( { todos, toggleComplete, category }) => {
           <div className="d-flex justify-content-between align-items-center">
             <div className="d-flex align-items-center">
               <input style={{ marginRight: '5px' }}onChange={() => toggleComplete(todo.id)} type="checkbox" />
-              <div style={{ textDecoration: todo.complete ? 'line-through' : 'none'}}>{todo.task}</div>
+              <div style={{ textDecoration: todo.complete ? 'line-through' : 'none' }}>{todo.task}</div>
             </div>
-            <Button 
-              variant="dark" 
-              className="float-right" 
-              size="sm"
-              onClick={() => toggleComplete(todo.id)}
-            >
-              {todo.complete ? 'undo' : 'complete'}
-            </Button>
+            <Dropdown>
+              <Dropdown.Toggle variant="success" id="dropdown-basic">
+                ...
+              </Dropdown.Toggle>
+              <Dropdown.Menu>
+                <Dropdown.Item onClick={() => console.log('delete')}>Delete</Dropdown.Item>
+                <Dropdown.Item onClick={() => console.log('Move')}>Move</Dropdown.Item>
+              </Dropdown.Menu>
+            </Dropdown>
           </div>
         </ListGroup.Item>
       )

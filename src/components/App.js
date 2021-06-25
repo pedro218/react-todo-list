@@ -47,7 +47,7 @@ const App = () => {
   return (
     <div>
       <Navbar bg="dark" variant="dark">
-        <div class="container-fluid">
+        <div className="container-fluid">
           <Navbar.Brand>Todo List Application</Navbar.Brand>
         </div>
       </Navbar>
