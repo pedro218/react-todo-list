@@ -16,7 +16,7 @@ const App = () => {
   const [showModal, setShowModal] = useState(false)
 
   const addTask = task => {
-    const id = todos[todos.length - 1].id + 1
+    const id = todos.length ? todos[todos.length - 1].id + 1 : 0
     setTodos([...todos, {id, ...task}])
   }
 
@@ -39,9 +39,14 @@ const App = () => {
     setShowModal(false)
   }
 
+  // Show Task or Category. 
   const showTorC = (makeTrue, makeFalse) => {
     makeTrue(true)
     makeFalse(false)
+  }
+
+  const removeTask = id => {
+    setTodos(todos.filter(todo => todo.id !== id))
   }
 
   return (
@@ -86,7 +91,7 @@ const App = () => {
           closeModal={closeModal} 
         />
         <hr />
-        <Categories categories={categories} todos={todos} toggleComplete={toggleComplete} /> 
+        <Categories categories={categories} todos={todos} removeTask={removeTask} toggleComplete={toggleComplete} /> 
       </Container>
     </div>
   )

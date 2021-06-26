@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { ListGroup, Button, Dropdown } from 'react-bootstrap'
 
-const ListTodo = ( { todos, toggleComplete, category }) => {
+const ListTodo = ({ todos, toggleComplete, removeTask, category }) => {
   const [seeComplete, setSeeComplete] = useState(true)
 
   const renderedList = () => {
@@ -22,7 +22,7 @@ const ListTodo = ( { todos, toggleComplete, category }) => {
                 ...
               </Dropdown.Toggle>
               <Dropdown.Menu>
-                <Dropdown.Item onClick={() => console.log('delete')}>Delete</Dropdown.Item>
+                <Dropdown.Item onClick={() => removeTask(todo.id)}>Delete</Dropdown.Item>
                 <Dropdown.Item onClick={() => console.log('Move')}>Move</Dropdown.Item>
               </Dropdown.Menu>
             </Dropdown>

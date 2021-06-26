@@ -3,12 +3,12 @@ import { Tabs, Tab } from 'react-bootstrap'
 
 import ListTodo from './ListTodos'
 
-const Categories = ({ categories, todos, toggleComplete }) => {
+const Categories = ({ categories, todos, removeTask, toggleComplete }) => {
   const rendered = () => {
     return categories.map(category => {
       return (
         <Tab eventKey={category} title={category.toUpperCase()} key={category}>
-          <ListTodo todos={todos} toggleComplete={toggleComplete} category={category} />
+          <ListTodo todos={todos} toggleComplete={toggleComplete} removeTask={removeTask} category={category} />
         </Tab>
       )
     })
